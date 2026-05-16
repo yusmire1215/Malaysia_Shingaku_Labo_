@@ -116,7 +116,7 @@ export default function HeroSection() {
           className="flex flex-wrap gap-12 mt-16 pt-12 border-t border-white/10"
         >
           {[
-            { num: "100+", label: "サポート実績" },
+            { num: "50+", label: "サポート実績" },
             { num: "4", label: "主要大学" },
             { num: "99%", label: "入学成功率" },
             { num: "24h", label: "サポート対応" },
