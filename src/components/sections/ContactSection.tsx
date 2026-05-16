@@ -23,9 +23,31 @@ export default function ContactSection() {
 
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setIsLoading(false);
-    setSubmitted(true);
+    try {
+      const response = await fetch('https://formspree.io/f/mgoqwvwn', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          grade: data.grade,
+          goal: data.goal,
+          budget: data.budget,
+          message: data.message,
+        }),
+      });
+
+      if (response.ok) {
+        setIsLoading(false);
+        setSubmitted(true);
+      } else {
+        alert('送信に失敗しました。もう一度お試しください。');
+        setIsLoading(false);
+      }
+    } catch (error) {
+      alert('エラーが発生しました。');
+      setIsLoading(false);
+    }
   };
 
   return (
