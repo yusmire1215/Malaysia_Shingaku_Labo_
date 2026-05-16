@@ -117,7 +117,7 @@ export default function HeroSection() {
         >
           {[
             { num: "100+", label: "サポート実績" },
-            { num: "4", label: "提携大学" },
+            { num: "4", label: "主要大学" },
             { num: "99%", label: "入学成功率" },
             { num: "24h", label: "サポート対応" },
           ].map((stat) => (
