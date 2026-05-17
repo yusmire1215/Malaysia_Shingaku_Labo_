@@ -23,38 +23,47 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "MalayStudy | マレーシア留学サポート",
-    template: "%s | MalayStudy",
+    default: "マレーシア進学ラボ | マレーシア留学サポート・完全無料相談",
+    template: "%s | マレーシア進学ラボ",
   },
   description:
-    "マレーシアへの留学を、プロがトータルサポート。INTI・SUNWAY・MONASH・TAYLOR'Sなどの名門大学への進学を徹底サポート。無料相談受付中。",
+    "マレーシアへの留学を完全サポート。Monash・Taylor's・Sunwayなど主要大学4校を紹介。英語ゼロからの留学実現。完全無料相談受付中。",
   keywords: [
     "マレーシア留学",
     "マレーシア大学",
-    "留学サポート",
-    "INTI",
-    "SUNWAY",
-    "MONASH",
-    "TAYLOR'S",
+    "留学支援",
+    "Monash University",
+    "Taylor's University",
+    "Sunway University",
+    "INTI International",
     "海外留学",
-    "英語留学",
+    "英語研修",
     "アジア留学",
   ],
-  authors: [{ name: "MalayStudy" }],
-  creator: "MalayStudy",
+  authors: [{ name: "マレーシア進学ラボ" }],
+  creator: "マレーシア進学ラボ",
+  metadataBase: new URL("https://malaysia-shingaku-lab.jp"),
   openGraph: {
     type: "website",
     locale: "ja_JP",
-    url: "https://malaysia-study.jp",
-    siteName: "MalayStudy",
-    title: "MalayStudy | マレーシア留学サポート",
+    url: "https://malaysia-shingaku-lab.jp",
+    siteName: "マレーシア進学ラボ",
+    title: "マレーシア進学ラボ | マレーシア留学サポート",
     description:
-      "マレーシアへの留学を、プロがトータルサポート。名門大学への進学を徹底サポート。無料相談受付中。",
+      "マレーシアへの留学を完全サポート。英語ゼロからの留学実現。完全無料相談受付中。",
+    images: [
+      {
+        url: "https://malaysia-shingaku-lab.jp/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "マレーシア進学ラボ",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MalayStudy | マレーシア留学サポート",
-    description: "マレーシアへの留学を、プロがトータルサポート。無料相談受付中。",
+    title: "マレーシア進学ラボ | マレーシア留学サポート",
+    description: "マレーシアへの留学を完全サポート。完全無料相談受付中。",
   },
   robots: {
     index: true,
@@ -62,12 +71,18 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
     },
   },
   viewport: {
     width: "device-width",
     initialScale: 1,
-    maximumScale: 1,
+    maximumScale: 5,
+  },
+  alternates: {
+    canonical: "https://malaysia-shingaku-lab.jp",
   },
 };
 
@@ -78,6 +93,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className="scroll-smooth">
+      <head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-GSNYVDQZ9L"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-GSNYVDQZ9L');
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${outfit.variable} ${cormorant.variable} ${dmMono.variable} font-sans antialiased grain`}
       >
