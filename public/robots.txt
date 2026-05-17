@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /.next
+
+Sitemap: https://malaysia-shingaku-lab.jp/sitemap.xml
