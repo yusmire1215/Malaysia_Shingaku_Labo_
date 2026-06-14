@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, Cormorant_Garamond, DM_Mono } from "next/font/google";
+import Script from "next/script"; // next/script をインポート
 import "./globals.css";
 
 const outfit = Outfit({
@@ -23,22 +24,25 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "マレーシア進学ラボ | マレーシア留学サポート・完全無料相談",
-    template: "%s | マレーシア進学ラボ",
+    // 変更: 「マレーシア進学」をタイトルの先頭に配置
+    default: "マレーシア進学・大学留学を完全サポート | マレーシア進学ラボ",
+    template: "%s | マレーシア進学・大学留学を完全サポート",
   },
   description:
-    "マレーシアへの留学を完全サポート。Monash・Taylor's・Sunwayなど主要大学4校を紹介。英語ゼロからの留学実現。完全無料相談受付中。",
+    // 変更: ディスクリプションの先頭にも「マレーシア進学」を配置
+    "マレーシア進学・大学留学を完全サポート。Monash・Taylor's・Sunwayなど主要大学4校への進学ルートを紹介。英語ゼロからの留学実現まで、マレーシア進学ラボが完全無料相談で伴走します。",
   keywords: [
-    "マレーシア留学",
+    // 変更: 「マレーシア進学」を追加し、上部に配置
+    "マレーシア進学",
     "マレーシア大学",
+    "マレーシア留学",
     "留学支援",
     "Monash University",
     "Taylor's University",
     "Sunway University",
     "INTI International",
     "海外留学",
-    "英語研修",
-    "アジア留学",
+    "海外進学", // 追加
   ],
   authors: [{ name: "マレーシア進学ラボ" }],
   creator: "マレーシア進学ラボ",
@@ -48,9 +52,10 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     url: "https://malaysia-shingaku-lab.jp",
     siteName: "マレーシア進学ラボ",
-    title: "マレーシア進学ラボ | マレーシア留学サポート",
+    // 変更: OGタグも統一
+    title: "マレーシア進学・大学留学を完全サポート | マレーシア進学ラボ",
     description:
-      "マレーシアへの留学を完全サポート。英語ゼロからの留学実現。完全無料相談受付中。",
+      "マレーシア進学・大学留学を完全サポート。英語ゼロからの留学実現。完全無料相談受付中。",
     images: [
       {
         url: "https://malaysia-shingaku-lab.jp/og-image.jpg",
@@ -62,8 +67,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "マレーシア進学ラボ | マレーシア留学サポート",
-    description: "マレーシアへの留学を完全サポート。完全無料相談受付中。",
+    title: "マレーシア進学・大学留学を完全サポート | マレーシア進学ラボ",
+    description: "マレーシア進学・大学留学を完全サポート。完全無料相談受付中。",
   },
   robots: {
     index: true,
@@ -76,14 +81,16 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
   alternates: {
     canonical: "https://malaysia-shingaku-lab.jp",
   },
+};
+
+// 変更: Next.jsの仕様に合わせて viewport を metadata の外に分離
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -93,26 +100,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className="scroll-smooth">
-      <head>
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-GSNYVDQZ9L"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-GSNYVDQZ9L');
-            `,
-          }}
-        />
-      </head>
       <body
         className={`${outfit.variable} ${cormorant.variable} ${dmMono.variable} font-sans antialiased grain`}
       >
         {children}
+
+        {/* 変更: Next.js推奨の next/script コンポーネントを使用 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-GSNYVDQZ9L"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GSNYVDQZ9L');
+          `}
+        </Script>
       </body>
     </html>
   );
